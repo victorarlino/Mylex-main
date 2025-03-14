@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Listagem clientes</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        nav {
+            width: 100%;
+            height: 100px;
+            background-color: #020620;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .navbar .logo {
+            color: #e7d49e;
+            font-size: 24px;
+        }
+
+        .navbar a {
+            color: #e7d49e;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        .mx-5 a {
+            color: #e7d49e;
+            text-decoration: none;
+            position: relative;
+        }
+
+        .mx-5 a::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: -2px;
+            height: 2px;
+            width: 0;
+            background: #e7d49e;
+            transform: translateX(-50%);
+            transition: width 0.4s ease-in-out;
+        }
+
+        .mx-5 a:hover::after {
+            width: 100%;
+        }
+
+        .logo {
+            margin: 1.5em;
+        }
+
+        .logo:hover {
+            transition: all 200ms ease-in;
+            transform: scale(1.1);
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #ccc;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #020620;
+            color: #e7d49e;
+        }
+
+        h3 {
+            margin-top: 50px;
+            margin-bottom: 30px;
+            color: #020620;
+        }
+
+        footer {
+            width: 100%;
+            height: 50px;
+            background-color: #020620;
+            color: #e7d49e;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
+    </style>
+</head>
+
+<body class="bg-secondary-subtle">
+    <nav class="navbar">
+        <div class="container-fluid">
+            <a class="logo ms-4 navbar-brand">MyLex</a>
+            <div class="mx-5">
+                <a class="p-2" style="color: #e7d49e" href="#">Agenda</a>
+                <a class="p-2" style="color: #e7d49e" href="processos.html">Processos</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h3>Listagem de Clientes</h3>
+        <hr>
+        <div class="d-flex justify-content-between mb-3">
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                href="cliente.html">Adicionar
+                Cliente</button>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>Telefone</th>
+                    <th>Processo</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id="clientTable">
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <button class="btn btn-warning btn-sm">Editar</button>
+                        <button class="btn btn-danger btn-sm">Excluir</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <button class="btn btn-warning btn-sm">Editar</button>
+                        <button class="btn btn-danger btn-sm">Excluir</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Modal para adicionar cliente -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Adicionar Cliente</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addClientForm">
+                        <div class="mb-3">
+                            <label for="clientName" class="form-label">Nome</label>
+                            <input type="text" class="form-control" id="clientName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="clientEmail" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="clientEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="clientPhone" class="form-label">Telefone</label>
+                            <input type="text" class="form-control" id="clientPhone" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="clientProcess" class="form-label">Processo</label>
+                            <input type="text" class="form-control" id="clientProcess" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-primary" id="saveClientButton">Salvar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 MyLex. Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script>
+        // Função para carregar os clientes
+        async function loadClients() {
+            const response = await fetch('http://localhost:3000/cliente/');
+            const clients = await response.json();
+            const clientTable = document.getElementById('clientTable');
+            clientTable.innerHTML = '';
+
+            clients.forEach(client => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${client.nomeCompleto}</td>
+                    <td>${client.email}</td>
+                    <td>${client.telefone || ''}</td>
+                    <td>${client.processo || ''}</td>
+                    <td>
+                        <button class="btn btn-warning btn-sm" onclick="editClient('${client._id}')">Editar</button>
+                        <button class="btn btn-danger btn-sm" onclick="deleteClient('${client._id}')">Excluir</button>
+                    </td>
+                `;
+                clientTable.appendChild(row);
+            });
+        }
+
+        let isEditing = false;
+        let currentClientId = null;
+
+        // Função para adicionar um novo cliente
+        async function addClient() {
+            const clientName = document.getElementById('clientName').value;
+            const clientEmail = document.getElementById('clientEmail').value;
+            const clientPhone = document.getElementById('clientPhone').value;
+            const clientProcess = document.getElementById('clientProcess').value;
+
+            const response = await fetch('http://localhost:3000/cliente/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    nomeCompleto: clientName,
+                    email: clientEmail,
+                    telefone: clientPhone,
+                    processo: clientProcess
+                })
+            });
+
+            if (response.ok) {
+                loadClients();
+                document.getElementById('addClientForm').reset();
+                document.querySelector('.btn-close').click();
+                isEditing = false;
+                currentClientId = null;
+                document.getElementById('exampleModalLabel').textContent = 'Adicionar Cliente';
+            }
+        }
+
+        // Função para editar um cliente
+        async function editClient(clientId) {
+            isEditing = true;
+            if (clientId != null) {
+                currentClientId = clientId;
+            }
+
+            const client = await fetch(`/cliente/${currentClientId}`).then(res => res.json());
+            document.getElementById('clientName').value = client.nomeCompleto;
+            document.getElementById('clientEmail').value = client.email;
+            document.getElementById('clientPhone').value = client.telefone || '';
+            document.getElementById('clientProcess').value = client.processo || '';
+            document.getElementById('saveClientButton').onclick = async function () {
+                const clientName = document.getElementById('clientName').value;
+                const clientEmail = document.getElementById('clientEmail').value;
+                const clientPhone = document.getElementById('clientPhone').value;
+                const clientProcess = document.getElementById('clientProcess').value;
+
+                const response = await fetch(`/cliente/${clientId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        nomeCompleto: clientName,
+                        email: clientEmail,
+                        telefone: clientPhone,
+                        processo: clientProcess
+                    })
+                });
+
+                if (response.ok) {
+                    loadClients();
+                    document.getElementById('addClientForm').reset();
+                    document.querySelector('.btn-close').click();
+                    isEditing = false;
+                    currentClientId = null;
+                    document.getElementById('exampleModalLabel').textContent = 'Adicionar Cliente';
+                }
+            };
+            new bootstrap.Modal(document.getElementById('exampleModal')).show();
+        }
+
+
+        // Função para excluir um cliente
+        async function deleteClient(clientId) {
+            const response = await fetch(`http://localhost:3000/cliente/${clientId}`, {
+                method: 'DELETE'
+            });
+
+            if (response.ok) {
+                loadClients();
+            }
+        }
+
+        document.getElementById('saveClientButton').addEventListener('click', () => {
+            if (isEditing) {
+                editClient();
+            } else {
+                addClient();    
+            }
+        });
+
+        // Carregar os clientes ao iniciar a página
+        window.onload = loadClients;
+    </script>
+</body>
+
+</html>
