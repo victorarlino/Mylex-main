@@ -1,4 +1,3 @@
-// NPM Imports
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -6,26 +5,34 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const path = require("path");
 
-// Servir arquivos estáticos do diretório "public"
-app.use(express.static(path.join(__dirname, "public")));
+// Conexão com MongoDB
+mongoose.connect('mongodb+srv://victorduartearlino2210:MAANcRaI2M5O5Q1L@cluster0.6ydf5.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
+  .then(() => console.log("Connected to MongoDB Atlas"))
+  .catch((err) => console.log("Error connecting to MongoDB Atlas:", err));
 
-// Servir arquivos estáticos do diretório "uploads"
+// Definição do Modelo no Mongoose
+const Adv = mongoose.model('fil', { 
+  title: String,
+  description: String,
+  image_url: String,
+  trailer_url: String
+});
+
+// Servir arquivos estáticos
+app.use(express.static(path.join(__dirname, "public")));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Upload Config Import
 const upload = require("./utils/uploadConfig");
 
-// Route Imports
+// Importação de Rotas
 const advogadoRoutes = require("./routes/advogado");
-const clienteRoutes = require('./routes/cliente');
+const clienteRoutes = require("./routes/cliente");
 const homepageRoutes = require("./routes/homepage");
 const calendarRoutes = require("./routes/calendar");
-const processoRouter = require('./routes/processos');
+const processoRouter = require("./routes/processos");
 
-// Config Import
-const config = require("./config");
-
-// Port Config
+// Configuração do Servidor
 const port = 3000;
 
 // Middlewares
@@ -33,26 +40,36 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(express.json());
 
-// Conexão com o MongoDB
-mongoose
-  .connect(config.db.connection)
-  .then(() => console.log("Connected to MongoDB Atlas"))
-  .catch((err) => console.log("Error connecting to MongoDB Atlas:", err));
-
-// Use Routes
+// Uso de Rotas
 app.use("/", advogadoRoutes);
 app.use("/cliente", clienteRoutes);
 app.use(homepageRoutes);
-app.use('/processos', processoRouter);
+app.use("/processos", processoRouter);
 app.use("/calendar", calendarRoutes);
 
-// Rota para lidar com upload de arquivos
+// Rota para Upload de Arquivos
 app.post("/upload", upload.single("file"), (req, res) => {
-  // Lógica para manipular o upload de arquivos
   res.send("Arquivo enviado com sucesso!");
 });
 
-// Iniciando o servidor
+// Rota para Criar um Novo Documento no MongoDB
+app.post("/", async (req, res) => {
+  try {
+    const newAdv = new Adv({
+      title: req.body.title,
+      description: req.body.description,
+      image_url: req.body.image_url,
+      trailer_url: req.body.trailer_url
+    });
+
+    await newAdv.save();
+    res.status(201).json(newAdv);
+  } catch (error) {
+    res.status(500).json({ error: "Erro ao salvar no banco de dados", details: error.message });
+  }
+});
+
+// Iniciando o Servidor
 app.listen(port, () => {
   console.log(`Servidor rodando na porta ${port}`);
 });
