@@ -10,7 +10,7 @@ mongoose.connect('mongodb+srv://victorduartearlino2210:MAANcRaI2M5O5Q1L@cluster0
   .then(() => console.log("Connected to MongoDB Atlas"))
   .catch((err) => console.log("Error connecting to MongoDB Atlas:", err));
 
-// Definição do Modelo no Mongoose
+
 const Adv = mongoose.model('fil', { 
   title: String,
   description: String,
@@ -18,11 +18,9 @@ const Adv = mongoose.model('fil', {
   trailer_url: String
 });
 
-// Servir arquivos estáticos
 app.use(express.static(path.join(__dirname, "public")));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-// Upload Config Import
 const upload = require("./utils/uploadConfig");
 
 // Importação de Rotas
@@ -35,7 +33,6 @@ const processoRouter = require("./routes/processos");
 // Configuração do Servidor
 const port = 3000;
 
-// Middlewares
 app.use(cors());
 app.use(bodyParser.json());
 app.use(express.json());
@@ -47,12 +44,11 @@ app.use(homepageRoutes);
 app.use("/processos", processoRouter);
 app.use("/calendar", calendarRoutes);
 
-// Rota para Upload de Arquivos
+
 app.post("/upload", upload.single("file"), (req, res) => {
   res.send("Arquivo enviado com sucesso!");
 });
 
-// Rota para Criar um Novo Documento no MongoDB
 app.post("/", async (req, res) => {
   try {
     const newAdv = new Adv({

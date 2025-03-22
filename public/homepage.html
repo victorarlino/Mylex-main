@@ -26,13 +26,11 @@
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
         }
 
-        .logo img {
-            max-height: 150px;
-            transition: transform 0.2s;
-        }
-
-        .logo img:hover {
-            transform: scale(1.1);
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #e7d49e;
+            text-decoration: none;
         }
 
         .nav-links a {
@@ -58,21 +56,26 @@
         #grafico {
             max-width: 300px;
             margin: 20px auto;
+            text-align: center;
         }
 
         .card {
             background-color: #d9d9d9;
             border-radius: 20px;
             margin-bottom: 15px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.2);
         }
     </style>
 </head>
 
 <body>
     <nav>
-        <a class="logo" href="homepage.html">
-            <img src="img/Mylex.png" alt="Logo">
-        </a>
+        <a class="logo" href="homepage.html">MYLEX</a>
         <div class="nav-links">
             <a href="calendar.html">Agenda</a>
             <a href="cliente.html">Clientes</a>
@@ -109,7 +112,6 @@
                 </div>
             </div>
         </div>
-
         <p class="m-3">Próximo mês</p>
         <div class="row">
             <div class="col-md-4">
@@ -135,24 +137,41 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        
         const data = {
             labels: ["Audiências", "Clientes", "Processos"],
             datasets: [{
                 label: "Estatísticas",
                 data: [30, 50, 20],
-                backgroundColor: ["rgb(255, 99, 132)", "rgb(54, 162, 235)", "rgb(255, 205, 86)"],
-                hoverOffset: 4
+                backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
+                borderColor: "#fff",
+                borderWidth: 2,
+                hoverBorderColor: "#000",
+                hoverOffset: 6
             }]
         };
 
         const config = {
             type: "doughnut",
-            data: data
+            data: data,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: "bottom",
+                        labels: {
+                            font: {
+                                size: 14,
+                                weight: "bold"
+                            },
+                            color: "#333"
+                        }
+                    }
+                }
+            }
         };
 
         new Chart(document.getElementById("myChart"), config);
     </script>
 </body>
-
 </html>

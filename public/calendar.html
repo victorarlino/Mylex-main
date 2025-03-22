@@ -22,17 +22,14 @@
             background-color: #020620;
             padding: 15px 0;
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
         }
 
-        .logo img {
-            max-height: 80px;
-        }
-
-        .container-fluid {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 20px;
+        .logo {
+            color: #e7d49e;
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
         }
 
         #create-event {
@@ -56,8 +53,8 @@
         }
 
         #calendar-container {
-            flex: 1;
-            width: 95%;
+            width: 80%;
+            max-width: 900px;
             margin-top: 20px;
             background: rgb(255, 255, 255);
             padding: 20px;
@@ -99,28 +96,13 @@
                 }
             });
             calendar.render();
-
-            document.getElementById('create-event').addEventListener('click', function () {
-                let title = prompt('Digite o título da audiência:');
-                let date = prompt('Digite a data da audiência (YYYY-MM-DD HH:MM):');
-                if (title && date) {
-                    calendar.addEvent({ title: title, start: date, allDay: false });
-                    alert('Audiência criada com sucesso!');
-                } else {
-                    alert('Preencha todos os campos corretamente.');
-                }
-            });
         });
     </script>
 </head>
 
 <body>
     <nav>
-        <div class="container-fluid">
-            <a class="navbar-brand logo">
-                <img src="img/Mylex.png" alt="Logo">
-            </a>
-        </div>
+        <a href="homepage.html" class="logo">MyLex</a>
     </nav>
 
     <div id="calendar-container">
