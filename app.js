@@ -6,7 +6,7 @@ const cors = require("cors");
 const path = require("path");
 
 // Conexão com MongoDB
-mongoose.connect('mongodb+srv://victorduartearlino2210:MAANcRaI2M5O5Q1L@cluster0.6ydf5.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
+mongoose.connect('mongodb+srv://victorduartearlino2210:simba22102001@cluster0.6ydf5.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
   .then(() => console.log("Connected to MongoDB Atlas"))
   .catch((err) => console.log("Error connecting to MongoDB Atlas:", err));
 
