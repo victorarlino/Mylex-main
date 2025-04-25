@@ -1,10 +1,14 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-const ProcessoSchema = new mongoose.Schema({
-    arquivo: { type: String, required: true },
-    categoria: { type: String, required: true },
-    status: { type: String, required: true },
-    cliente: { type: String, required: true }
+const processoSchema = new mongoose.Schema({
+  numero: { type: String, required: true, unique: true },
+  descricao: { type: String },
+  status: { type: String, enum: ["ativo", "em andamento", "concluído"], default: "em andamento" },
+  dataCriacao: { type: Date, default: Date.now },
+  advogado: { type: mongoose.Schema.Types.ObjectId, ref: "Advogado", required: true },
+  cliente: { type: mongoose.Schema.Types.ObjectId, ref: "Cliente", required: true }
+}, {
+  timestamps: true
 });
 
-module.exports = mongoose.model('Processo', ProcessoSchema);
+module.exports = mongoose.model("Processo", processoSchema);
