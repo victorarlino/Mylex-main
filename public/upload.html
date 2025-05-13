@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload de XML</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .upload-container {
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+            width: 600px; /* Largura fixa para o container de upload */
+            text-align: center;
+        }
+        .upload-container h2 {
+            margin-top: 0;
+            color: #007bff; /* Cor azul */
+        }
+        .upload-container p {
+            color: #666;
+        }
+        .upload-area {
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            cursor: pointer;
+        }
+        .upload-area:hover {
+            background-color: #f1f1f1;
+        }
+        .upload-buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+        .upload-buttons button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .upload-buttons button.cancel {
+            background-color: #6c757d;
+        }
+        .upload-buttons button:hover {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="upload-container">
+        <h2>Upload de XML</h2>
+        <p>Informe até <strong>40 arquivos XML</strong> de cada vez.<br>
+        Se preferir, envie um arquivo compactado no formato <strong>ZIP ou RAR</strong>.<br>
+        (Tamanho máximo: <strong>10MB</strong>)</p>
+        <div class="upload-area">
+            ARRASTE E SOLTE OS ARQUIVOS AQUI<br>
+            ou se preferir...
+            <br><br>
+            <button>Escolha um arquivo para fazer upload</button>
+        </div>
+        <div class="upload-buttons">
+            <button class="cancel">Cancelar</button>
+            <button class="upload">Fazer Upload</button>
+        </div>
+    </div>
+</body>
+</html>
